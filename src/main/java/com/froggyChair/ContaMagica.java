@@ -27,7 +27,7 @@ public class ContaMagica {
                 status = GOLD;
             }
         }
-        if (status == GOLD){
+        else if (status == GOLD){
             if (saldo>200000){
                 status = PLATINUM;
             }
