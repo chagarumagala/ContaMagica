@@ -18,19 +18,23 @@ public class ContaMagica {
         return status;
     }
     public void deposito(int valor) throws INVALID_OPER_EXCEPTION{
-        saldo =  saldo + valor;
         if (valor<0){
             throw new INVALID_OPER_EXCEPTION("valor invalido");
         }
         if (status == SILVER){
+            saldo =  saldo + valor;
             if (saldo>50000){
                 status = GOLD;
             }
         }
         else if (status == GOLD){
+            saldo =  saldo + (valor * 1.01);
             if (saldo>200000){
                 status = PLATINUM;
             }
+        }
+        else if (status == PLATINUM){
+            saldo = saldo + (valor * 1.025);
         }
     }
     public void retirada(int valor) throws INVALID_OPER_EXCEPTION{
