@@ -7,7 +7,7 @@ public class ContaSpec {
     @Test
     // This tests verifies if a new account starts empty
     public void accountStartsEmpty(){
-        ContaMagica conta = newContaMagica();
+        ContaMagica conta = new ContaMagica();
         assertTrue(conta.saldo() == 0, () -> "A conta deve começar com saldo = 0");
     }
 }
