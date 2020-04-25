@@ -33,12 +33,13 @@ public class ContaSpec {
     }
 
     //This test ensures that the switch from silver to gold is working properly
+    @Test
     public void switchSilverGold() throws INVALID_OPER_EXCEPTION{
         ContaMagica conta = new ContaMagica();
         conta.deposito(50000);
         assertTrue(conta.getStatus() == 1, () -> "O status deve ser igual 1 após a conta atingir 50k");
     }
-
+    @Test
     public void switchSilverGoldEdge() throws INVALID_OPER_EXCEPTION{
         ContaMagica conta = new ContaMagica();
         conta.deposito(200000);
