@@ -17,6 +17,6 @@ public class ContaSpec {
         assertThrows(INVALID_OPER_EXCEPTION.class, ()->{
             ContaMagica conta = new ContaMagica();
             conta.deposito(-1000);
-        }
+        });
     }
 }
