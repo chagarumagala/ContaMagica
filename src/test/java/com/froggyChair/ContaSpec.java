@@ -45,4 +45,20 @@ public class ContaSpec {
         conta.deposito(200000);
         assertTrue(conta.getStatus() == 1, () -> "O status deve ser igual 1 após a conta atingir 50k");
     }
+    //Makes sure silver account gets 0% interest in their deposits
+    @Test
+    public void silverGetsNothing() throws INVALID_OPER_EXCEPTION{
+        ContaMagica conta = new ContaMagica();
+        conta.deposito(10);
+        assertTrue(conta.getSaldo() == 10, () -> "Contas silver não ganham bonus nos depositos");
+    }
+
+    // Makes sures gold account gets 1% interest in their deposits
+    @Test
+    public void goldProfit() throws INVALID_OPER_EXCEPTION{
+        ContaMagica conta = new ContaMagica();
+        conta.deposito(100000);
+        conta.deposito(1000);
+        assertTrue(conta.getSaldo() == 100000 + (1000 * 0.01), () -> "Contas gold ganham 1% nos depositos");
+    }
 }
