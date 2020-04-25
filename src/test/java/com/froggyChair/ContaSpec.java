@@ -41,7 +41,7 @@ public class ContaSpec {
 
     public void switchSilverGoldEdge() throws INVALID_OPER_EXCEPTION{
         ContaMagica conta = new ContaMagica();
-        conta.deposito(199999);
-        assertTrue(conta.getStatus() == 1, () -> "O status deve ser igual 1 após a conta atingir 50k mas ter menos de 200k");
+        conta.deposito(200000);
+        assertTrue(conta.getStatus() == 1, () -> "O status deve ser igual 1 após a conta atingir 50k");
     }
 }
