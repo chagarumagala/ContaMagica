@@ -19,4 +19,16 @@ public class ContaSpec {
             conta.deposito(-1000);
         });
     }
+    //This test verifies if there are any changes when there is a deposit under 50k
+    @Test
+    public void under50K() throws INVALID_OPER_EXCEPTION{
+        ContaMagica conta = new ContaMagica();
+        conta.deposito(1000);
+        assertTrue(conta.getStatus() == 0, () -> "O status não deve mudar se a conta nunca passou de 50k");
+    }
+    public void underk50kEdge() throws INVALID_OPER_EXCEPTION{
+        ContaMagica conta = new ContaMagica();
+        conta.deposito(49999);
+        assertTrue(conta.getStatus() == 0, () -> "O status não deve mudar se a conta nunca passou de 50k");
+    }
 }
