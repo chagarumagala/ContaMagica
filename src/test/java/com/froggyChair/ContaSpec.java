@@ -2,6 +2,9 @@ package com.froggyChair;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.security.InvalidAlgorithmParameterException;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ContaSpec {
@@ -61,4 +64,45 @@ public class ContaSpec {
         conta.deposito(1000);
         assertTrue(conta.getSaldo() == 100000 + (1000 * 0.01), () -> "Contas gold ganham 1% nos depositos");
     }
+
+    @Test
+    public void goldPersistence() throws INVALID_OPER_EXCEPTION{
+        ContaMagica conta = new ContaMagica();
+        conta.deposito(50000);
+        conta.deposito(50000);
+        assertTrue(conta.getStatus() == 1, () -> "Contas Gold com menos de 200k permanecem Gold");
+    }
+    @Test
+    public void goldToPlatinum() throws INVALID_OPER_EXCEPTION{
+        ContaMagica conta = new ContaMagica();
+        conta.deposito(200000);
+        conta.deposito(0);
+        assertTrue(conta.getStatus() == 2);
+    }
+    @Test
+    public void ensurePlatinumBonus() throws INVALID_OPER_EXCEPTION{
+        ContaMagica conta = new ContaMagica();
+        conta.deposito(200000);
+        conta.deposito(100000);
+        conta.deposito(100000);
+        assertTrue(conta.getSaldo() == 200000 + (100000 * 1.01) + (100000 * 1.025));
+    }
+
+    @Test
+    public void cannotGetNegativeCash(){
+        assertThrows(INVALID_OPER_EXCEPTION.class, () -> {
+            ContaMagica conta = new ContaMagica();
+            conta.deposito(10);
+            conta.retirada(-1);
+        });
+    }
+    
+    @Test void cannotGetMoreCashThanWhatYouHavE(){
+        assertThrows(INVALID_OPER_EXCEPTION.class, () -> {
+            ContaMagica conta = new ContaMagica();
+            conta.deposito(10);
+            conta.retirada(11);
+        });
+    }
+
 }
