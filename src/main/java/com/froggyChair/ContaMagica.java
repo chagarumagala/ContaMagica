@@ -38,6 +38,15 @@ public class ContaMagica {
         }
     }
     public void retirada(int valor) throws INVALID_OPER_EXCEPTION{
-
+        if (valor<0 || valor>saldo){
+            throw new INVALID_OPER_EXCEPTION("valor invalido");
+        }
+        saldo =  saldo - valor;
+        if (status == GOLD && saldo<25000){
+            status = SILVER;
+        }
+        else if (status == PLATINUM && saldo<100000){
+            status = GOLD;
+        }
     }
 }
