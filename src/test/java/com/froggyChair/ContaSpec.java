@@ -97,12 +97,51 @@ public class ContaSpec {
         });
     }
     
-    @Test void cannotGetMoreCashThanWhatYouHavE(){
+    @Test 
+    public void cannotGetMoreCashThanWhatYouHavE(){
         assertThrows(INVALID_OPER_EXCEPTION.class, () -> {
             ContaMagica conta = new ContaMagica();
             conta.deposito(10);
             conta.retirada(11);
         });
+    }
+
+    @Test 
+    public void withdrawSilver() throws INVALID_OPER_EXCEPTION{
+        ContaMagica conta = new ContaMagica();
+        conta.deposito(1000);
+        conta.retirada(100);
+        assertTrue(conta.getSaldo()==900,() -> "Conta deve conter 900 apos retirada");
+
+    }
+
+    @Test 
+    public void fallGoldToSilver() throws INVALID_OPER_EXCEPTION{
+        ContaMagica conta = new ContaMagica();
+        conta.deposito(50000);
+        conta.retirada(26000);
+        assertTrue(conta.getStatus()==0,() -> "Conta deve cair para Silver");
+
+    }
+
+    @Test 
+    public void fallPlatinumToGold() throws INVALID_OPER_EXCEPTION{
+        ContaMagica conta = new ContaMagica();
+        conta.deposito(200000);
+        conta.deposito(0);
+        conta.retirada(110000);
+        assertTrue(conta.getStatus()==1,() -> "Conta deve cair para Gold");
+
+    }
+
+    @Test 
+    public void doubleFall() throws INVALID_OPER_EXCEPTION{
+        ContaMagica conta = new ContaMagica();
+        conta.deposito(200000);
+        conta.deposito(0);
+        conta.retirada(190000);
+        assertTrue(conta.getStatus()==1,() -> "Conta deve cair para Gold mesmo tendo retirado o sificiente para ser Silver");
+
     }
 
 }
